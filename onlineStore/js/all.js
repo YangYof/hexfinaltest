@@ -200,6 +200,13 @@ const changeNumApi = (id, qty)=>{
 //     }
 // }
 const formOrder = document.querySelector('.orderInfo-form');
+const resetInput = ()=>{
+    document.querySelector('#customerName').value = '';
+    document.querySelector('#customerPhone').value = '';
+    document.querySelector('#customerEmail').value = '';
+    document.querySelector('#customerAddress').value = '';
+    document.querySelector('#tradeWay').value = 'ATM';
+};
 const validata = ()=>{
     let constraints ={
         '姓名':{
@@ -258,6 +265,7 @@ const sendOrder = (user)=>{
     .then((res)=>{
         // console.log(res);
         getCarts();
+        resetInput();
     });
 };
 const init = ()=> {
