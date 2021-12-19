@@ -259,7 +259,7 @@ formOrder.addEventListener('submit', function(e){
     validata();
     sendOrder(user)
 });
-console.log(formOrder);
+
 const sendOrder = (user)=>{
     axios.post(`${haxApi}/api/livejs/v1/customer/${apiPath}/orders`,{data:{user}})
     .then((res)=>{
