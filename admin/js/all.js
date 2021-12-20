@@ -53,7 +53,7 @@ const renderOrders = (orders)=>{
                 <td class="js-orderProducts">
                     <p>Louvre 雙人床架</p>
                 </td>
-                <td>${item.createdAt}</td>
+                <td>${ timestampToTime(item.createdAt)}</td>
                 <td class="orderStatus">
                     ${item.paid ? `<a href="#" data-id="${item.id}" class="text-success">已處理</a>` : `<a href="#" data-id="${item.id}" class="text-danger">未處理</a>`}
                 </td>
@@ -191,4 +191,15 @@ const c3Donut = (data)=>{
 
 
 
+function timestampToTime(timestamp) {
+    var date = new Date(timestamp * 1000);//時間戳為10位需*1000，時間戳為13位的話不需乘1000
+    Y = date.getFullYear() + '-';
+    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    D = date.getDate() + ' ';
+    return Y+M+D;
+    }
+    timestampToTime(1639964143);
+    console.log(timestampToTime(1639964143));//2014-06-18 10:33:24
+
+// 1639964812299
 
