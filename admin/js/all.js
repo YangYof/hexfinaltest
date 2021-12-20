@@ -40,29 +40,49 @@ const renderOrders = (orders)=>{
             </tr>
         </thead>
     `
-    orders.forEach(function(item){
-        str += `
-            <tr>
-                <td>10088377474</td>
-                <td>
-                    <p>${item.user.name}</p>
-                    <p>${item.user.tel}</p>
-                </td>
-                <td>${item.user.address}</td>
-                <td>${item.user.email}</td>
-                <td class="js-orderProducts">
-                    <p>Louvre 雙人床架</p>
-                </td>
-                <td>${ timestampToTime(item.createdAt)}</td>
-                <td class="orderStatus">
-                    ${item.paid ? `<a href="#" data-id="${item.id}" class="text-success">已處理</a>` : `<a href="#" data-id="${item.id}" class="text-danger">未處理</a>`}
-                </td>
-                <td>
-                    <input type="button" data-id=${item.id} class="delSingleOrder-Btn" value="刪除">
-                </td>
-            </tr>
-        `
-    });
+    // orders.forEach(function(item){
+    //     str += `
+    //         <tr>
+    //             <td>10088377474</td>
+    //             <td>
+    //                 <p>${item.user.name}</p>
+    //                 <p>${item.user.tel}</p>
+    //             </td>
+    //             <td>${item.user.address}</td>
+    //             <td>${item.user.email}</td>
+    //             <td class="js-orderProducts">
+    //                 <p>Louvre 雙人床架</p>
+    //             </td>
+    //             <td>${ timestampToTime(item.createdAt)}</td>
+    //             <td class="orderStatus">
+    //                 ${item.paid ? `<a href="#" data-id="${item.id}" class="text-success">已處理</a>` : `<a href="#" data-id="${item.id}" class="text-danger">未處理</a>`}
+    //             </td>
+    //             <td>
+    //                 <input type="button" data-id=${item.id} class="delSingleOrder-Btn" value="刪除">
+    //             </td>
+    //         </tr>
+    //     `
+    // });
+    orders.map(item=>
+        str += `<tr>
+                    <td>10088377474</td>
+                    <td>
+                        <p>${item.user.name}</p>
+                        <p>${item.user.tel}</p>
+                    </td>
+                    <td>${item.user.address}</td>
+                    <td>${item.user.email}</td>
+                    <td class="js-orderProducts">
+                        <p>Louvre 雙人床架</p>
+                    </td>
+                    <td>${ timestampToTime(item.createdAt)}</td>
+                    <td class="orderStatus">
+                        ${item.paid ? `<a href="#" data-id="${item.id}" class="text-success">已處理</a>` : `<a href="#" data-id="${item.id}" class="text-danger">未處理</a>`}
+                    </td>
+                    <td>
+                        <input type="button" data-id=${item.id} class="delSingleOrder-Btn" value="刪除">
+                    </td>
+                </tr>`).join('');
     orderPage.innerHTML = str;
     // ${item.paid ? <a href="#">已處理</a> : <a href="#">未處理</a>}
 };
@@ -178,28 +198,22 @@ const donutChartData = (orders)=> {
 };
 
 const c3Donut = (data)=>{
-    const chart = c3.generate({
-    data: {
-        columns: data,
-        type : 'donut',
-    },
-    donut: {
-        title: "Iris Petal Width"
-    }
-});
+        const chart = c3.generate({
+        data: {
+            columns: data,
+            type : 'donut',
+        },
+        donut: {
+            title: "Iris Petal Width"
+        }
+    });
 };
 
-
-
-function timestampToTime(timestamp) {
-    var date = new Date(timestamp * 1000);//時間戳為10位需*1000，時間戳為13位的話不需乘1000
+const timestampToTime=(timestamp)=>{
+    var date = new Date(timestamp * 1000);
     Y = date.getFullYear() + '-';
     M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
     D = date.getDate() + ' ';
     return Y+M+D;
-    }
-    timestampToTime(1639964143);
-    console.log(timestampToTime(1639964143));//2014-06-18 10:33:24
-
-// 1639964812299
+}
 
